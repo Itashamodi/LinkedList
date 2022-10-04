@@ -1,0 +1,69 @@
+package linkedlist;
+
+import java.util.Scanner;
+
+public class Reverselist {
+	//print function
+	public static void print(LinkedListNode<Integer> head) 
+	{
+		while(head!=null) 
+		{
+			System.out.print(head.data+" ");
+			head=head.next;
+		}
+	}
+	//taking input
+	public static LinkedListNode<Integer> takeinput()
+
+	{
+		LinkedListNode head=null,tail=null;
+		Scanner s = new Scanner(System.in);
+		int data=s.nextInt();
+		while(data!=-1) 
+		{
+			LinkedListNode newnode= new LinkedListNode<Integer>(data);
+			if(head==null) 
+			{
+				head=newnode;
+				tail=newnode;
+			}
+			else 
+			{
+				tail.next=newnode;
+				tail=tail.next;
+			}
+			data=s.nextInt();
+			
+		}
+		return head;
+		
+	}
+
+	//reverse list
+	public static LinkedListNode<Integer> reverse(LinkedListNode<Integer> head)
+	{
+		if(head==null || head.next==null) 
+		{
+			return head;
+		}
+		LinkedListNode<Integer> revhead=reverse(head.next);
+		LinkedListNode<Integer> tail = revhead;
+		while(tail.next!=null) 
+		{
+			tail=tail.next;
+		}
+		tail.next=head;
+		head.next=null;
+		return revhead;
+	}
+	public static void main(String[] args) 
+	{
+		LinkedListNode <Integer> head;
+		head=takeinput();
+		head=reverse(head);
+		print(head);
+		
+
+	}
+
+}
